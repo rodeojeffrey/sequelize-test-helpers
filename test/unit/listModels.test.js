@@ -1,5 +1,3 @@
-const { expect } = require('chai')
-
 const { listModels } = require('../../src')
 
 describe('src/listModels', () => {
@@ -8,7 +6,7 @@ describe('src/listModels', () => {
     const models = listModels('test/models')
 
     it('lists the models', () => {
-      expect(models).to.deep.equal(expected)
+      expect(models).toEqual(expected)
     })
   })
 
@@ -16,7 +14,7 @@ describe('src/listModels', () => {
     const models = listModels('test/models', '.js')
 
     it('lists the models', () => {
-      expect(models).to.deep.equal(expected)
+      expect(models).toEqual(expected)
     })
   })
 })

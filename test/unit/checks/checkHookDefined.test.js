@@ -1,4 +1,3 @@
-const { expect } = require('chai')
 const { sequelize, dataTypes, checkHookDefined } = require('../../../src')
 const HasHooksModel = require('../../models/HasHooks')
 

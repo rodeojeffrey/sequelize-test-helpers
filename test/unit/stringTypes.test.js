@@ -1,5 +1,3 @@
-const { expect } = require('chai')
-
 const { dataTypes } = require('../../src')
 
 describe('src/dataTypes#string', () => {
@@ -7,13 +5,13 @@ describe('src/dataTypes#string', () => {
     describe(`Testing ${dataType}`, () => {
       context('non function', () => {
         it(`supports ${dataType} with BINARY`, () => {
-          expect(dataTypes[dataType].BINARY).to.exist
+          expect(dataTypes[dataType].BINARY).toBeDefined()
         })
       })
 
       context('function', () => {
         it(`supports ${dataType}() with BINARY`, () => {
-          expect(dataTypes[dataType](10).BINARY).to.exist
+          expect(dataTypes[dataType](10).BINARY).toBeDefined()
         })
       })
     })

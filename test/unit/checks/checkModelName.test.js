@@ -1,4 +1,3 @@
-const { expect } = require('chai')
 const { sequelize, dataTypes, checkModelName } = require('../../../src')
 const SimpleModel = require('../../models/Simple')
 

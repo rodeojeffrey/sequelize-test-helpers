@@ -1,5 +1,3 @@
-const { expect } = require('chai')
-
 const { sequelize, dataTypes, checkNonUniqueIndex } = require('../../../src')
 const IndexedModel = require('../../models/Indexed')
 
