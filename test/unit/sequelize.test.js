@@ -9,7 +9,8 @@ describe('src/sequelize', () => {
 
   staticMethods.forEach(method => {
     it(`has static method ${method}`, () => {
-      expect(sequelize[method]).toBeInstanceOf(Function)
+      const fn = sequelize[method]
+      expect(fn.constructor.name).toBe('Function')
     })
   })
 })

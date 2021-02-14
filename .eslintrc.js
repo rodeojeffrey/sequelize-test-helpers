@@ -2,7 +2,7 @@
 // designed to run in a mocha context
 module.exports = {
   extends: ['standard', 'prettier', 'prettier/standard'],
-  plugins: ['prettier', 'import', 'promise', 'mocha'],
+  plugins: ['prettier', 'import', 'promise', 'jest'],
   parserOptions: {
     sourceType: 'module'
   },

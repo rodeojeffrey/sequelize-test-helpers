@@ -62,7 +62,7 @@ describe('dataTypes', () => {
 
   it('has Deferrable', () => {
     expect(dataTypes).toHaveProperty('Deferrable')
-    expect(dataTypes.Deferrable).toEqual(expect.arrayContaining(deferrables))
+    expect(Object.keys(dataTypes.Deferrable)).toEqual(expect.arrayContaining(deferrables))
   })
 
   it('has basicTypes', () => {

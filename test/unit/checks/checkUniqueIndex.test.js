@@ -5,14 +5,17 @@ describe('src/checkUniqueIndex', () => {
   const Model = IndexedModel(sequelize, dataTypes)
   const instance = new Model()
 
-  context('happy path', () => {
+  describe('happy path', () => {
     ;['uuid'].forEach(checkUniqueIndex(instance))
   })
 
-  context('unhappy path', () => {
-    it('fails the test', () =>
-      expect(() => {
+  describe('unhappy path', () => {
+    it('fails the test', () => {
+      try {
         checkUniqueIndex(instance)('no such index')
-      }).to.throw)
+      } catch (e) {
+        expect(e).toBeTruthy()
+      }
+    })
   })
 })

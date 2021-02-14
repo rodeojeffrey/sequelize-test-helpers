@@ -1,8 +1,6 @@
-const { spy } = require('sinon')
-
 const DataTypes = require('./dataTypes')
 
 class Model {}
-Model.init = spy()
+Model.init = jest.fn()
 
 module.exports = { Model, DataTypes }

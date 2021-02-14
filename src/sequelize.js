@@ -1,4 +1,3 @@
-const sinon = require('sinon')
 const hooks = require('./constants/hooks')
 const staticMethods = require('./constants/staticMethods')
 const { syncMethods, asyncMethods } = require('./constants/staticModelMethods')
@@ -19,7 +18,7 @@ const sequelize = {
     }
 
     const addStatic = key => {
-      model[key] = sinon.stub()
+      model[key] = jest.fn()
     }
 
     hooks.forEach(hook => {
@@ -34,11 +33,11 @@ const sequelize = {
     syncMethods.forEach(addStatic)
     asyncMethods.forEach(addStatic)
 
-    model.isHierarchy = sinon.spy()
+    model.isHierarchy = jest.fn()
 
-    model.prototype.update = sinon.stub()
-    model.prototype.reload = sinon.stub()
-    model.prototype.set = sinon.spy()
+    model.prototype.update = jest.fn()
+    model.prototype.reload = jest.fn()
+    model.prototype.set = jest.fn()
     Object.keys(modelDefn).forEach(attachProp)
 
     model.prototype.indexes = metaData.indexes
@@ -49,7 +48,7 @@ const sequelize = {
 }
 
 staticMethods.forEach(method => {
-  sequelize[method] = sinon.stub()
+  sequelize[method] = jest.fn()
 })
 
 module.exports = sequelize

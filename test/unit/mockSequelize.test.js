@@ -12,7 +12,7 @@ describe('src/mockSequelize', () => {
   })
 
   it('Model has a static init function', () => {
-    expect(Sequelize.Model.init).toBeInstanceOf(Function)
+    expect(Sequelize.Model.init.constructor.name).toBe('Function')
   })
 
   it('has DataTypes', () => {
