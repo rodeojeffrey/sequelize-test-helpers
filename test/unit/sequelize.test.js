@@ -1,17 +1,16 @@
-const { expect } = require('chai')
-
 const sequelize = require('../../src/sequelize')
 const staticMethods = require('../../src/constants/staticMethods')
 
 describe('src/sequelize', () => {
   it('has define', () => {
-    expect(sequelize).to.have.property('define')
-    expect(sequelize.define).to.be.a('function')
+    expect(sequelize).toHaveProperty('define')
+    expect(sequelize.define).toBeInstanceOf(Function)
   })
 
   staticMethods.forEach(method => {
     it(`has static method ${method}`, () => {
-      expect(sequelize[method]).to.be.a('function')
+      const fn = sequelize[method]
+      expect(fn.constructor.name).toBe('Function')
     })
   })
 })

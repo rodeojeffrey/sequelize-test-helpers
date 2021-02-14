@@ -1,19 +1,20 @@
-const { expect } = require('chai')
-
 const { sequelize, dataTypes, checkUniqueCompoundIndex } = require('../../../src')
 const IndexedModel = require('../../models/Indexed')
 
 describe('src/checkUniqueCompoundIndex', () => {
   const Model = IndexedModel(sequelize, dataTypes)
   const instance = new Model()
-  context('happy path', () => {
+  describe('happy path', () => {
     ;[['name', 'lunch']].forEach(checkUniqueCompoundIndex(instance))
   })
 
-  context('unhappy path', () => {
-    it('fails the test', () =>
-      expect(() => {
+  describe('unhappy path', () => {
+    it('fails the test', () => {
+      try {
         checkUniqueCompoundIndex(instance)('no such index')
-      }).to.throw)
+      } catch (e) {
+        expect(e).toBeTruthy()
+      }
+    })
   })
 })

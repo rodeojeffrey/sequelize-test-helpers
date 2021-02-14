@@ -1,12 +1,10 @@
 ![Horizontal Logo](logo/horizontal.svg)
 
-A collection of utilities to help with unit-testing [Sequelize](http://docs.sequelizejs.com) models and code that needs those models.
+A collection of utilities to help with unit-testing [Sequelize](http://docs.sequelizejs.com) models and code that needs those models. 
+This project uses jest and it's a fork of this [project](https://github.com/davesag/sequelize-test-helpers)
+Thanks to [Dave](https://github.com/davesag) Give him some love.
 
-[![NPM](https://nodei.co/npm/sequelize-test-helpers.png)](https://nodei.co/npm/sequelize-test-helpers/)
-
-## Related Projects
-
-- [`sequelize-pg-utilities`](https://github.com/davesag/sequelize-pg-utilities) — Simple utilities that help you manage your Sequelize configuration.
+[![NPM](https://nodei.co/npm/sequelize-test-helpers.png)](https://nodei.co/npm/sequelize-test-helpers-jest/)
 
 ## How to use
 
@@ -14,13 +12,11 @@ A collection of utilities to help with unit-testing [Sequelize](http://docs.sequ
 
 This library assumes:
 
-1. You are using [`chai`](http://www.chaijs.com) — Version 4 or better.
-2. You are using [`sinon`](http://sinonjs.org) — Version 5 or better.
-3. Using [`mocha`](https://mochajs.org) is also recommended, but as long as you are using `chai` and `sinon` this should work with any test runner.
+1. You are using [`jest`](https://jestjs.io)
 
 ### Installation
 
-Add `sequelize-test-helpers` as a `devDependency`:
+Add `sequelize-test-helpers-jest` as a `devDependency`:
 
 ```sh
 npm i -D sequelize-test-helpers
@@ -210,83 +206,6 @@ const save = async ({ id, ...data }) => {
 module.exports = save
 ```
 
-You want to unit-test this without invoking a database connection (so you can't `require('src/models')` in your test).
-
-This is where `makeMockModels`, `sinon`, and [`proxyquire`](https://github.com/thlorenz/proxyquire) come in handy.
-
-#### `test/unit/utils/save.test.js`
-
-```js
-const { expect } = require('chai')
-const { match, stub, resetHistory } = require('sinon')
-const proxyquire = require('proxyquire')
-
-const { makeMockModels } = require('sequelize-test-helpers')
-
-describe('src/utils/save', () => {
-  const User = { findOne: stub() }
-  const mockModels = makeMockModels({ User })
-
-  const save = proxyquire('../../../src/utils/save', {
-    '../models': mockModels
-  })
-
-  const id = 1
-  const data = {
-    firstname: 'Testy',
-    lastname: 'McTestface',
-    email: 'testy.mctestface.test.tes',
-    token: 'some-token'
-  }
-  const fakeUser = { id, ...data, update: stub() }
-
-  let result
-
-  context('user does not exist', () => {
-    before(async () => {
-      User.findOne.resolves(undefined)
-      result = await save({ id, ...data })
-    })
-
-    after(resetHistory)
-
-    it('called User.findOne', () => {
-      expect(User.findOne).to.have.been.calledWith(match({ where: { id } }))
-    })
-
-    it("didn't call user.update", () => {
-      expect(fakeUser.update).not.to.have.been.called
-    })
-
-    it('returned null', () => {
-      expect(result).to.be.null
-    })
-  })
-
-  context('user exists', () => {
-    before(async () => {
-      fakeUser.update.resolves(fakeUser)
-      User.findOne.resolves(fakeUser)
-      result = await save({ id, ...data })
-    })
-
-    after(resetHistory)
-
-    it('called User.findOne', () => {
-      expect(User.findOne).to.have.been.calledWith(match({ where: { id } }))
-    })
-
-    it('called user.update', () => {
-      expect(fakeUser.update).to.have.been.calledWith(match(data))
-    })
-
-    it('returned the user', () => {
-      expect(result).to.deep.equal(fakeUser)
-    })
-  })
-})
-```
-
 As a convenience, `makeMockModels` will automatically populate your `mockModels` with mocks of all of the models defined in your `src/models` folder (or if you have a `.sequelizerc` file it will look for the `model-path` in that). Simply override any of the specific models you need to do stuff with.
 
 ### Testing models created with `Model.init`
@@ -311,47 +230,6 @@ const factory = sequelize => {
 }
 
 module.exports = factory
-```
-
-You can test this using `sequelize-test-helpers`, `sinon`, and `proxyquire`.
-
-```js
-const { expect } = require('chai')
-const { spy } = require('sinon')
-const proxyquire = require('proxyquire')
-const { sequelize, Sequelize } = require('sequelize-test-helpers')
-
-describe('src/models/User', () => {
-  const { DataTypes } = Sequelize
-
-  const UserFactory = proxyquire('src/models/User', {
-    sequelize: Sequelize
-  })
-
-  let User
-
-  before(() => {
-    User = UserFactory(sequelize)
-  })
-
-  // It's important you do this
-  after(() => {
-    User.init.resetHistory()
-  })
-
-  it('called User.init with the correct parameters', () => {
-    expect(User.init).to.have.been.calledWith(
-      {
-        firstName: DataTypes.STRING,
-        lastName: DataTypes.STRING
-      },
-      {
-        sequelize,
-        modelName: 'User'
-      }
-    )
-  })
-})
 ```
 
 ### Listing your models
@@ -389,7 +267,6 @@ By default `makeMockModels` and `listModels` will both look for your models in f
 <!-- prettier-ignore -->
 | Branch | Status | Coverage | Audit | Notes |
 | ------ | ------ | -------- | ----- | ----- |
-| `develop` | [![CircleCI](https://circleci.com/gh/davesag/sequelize-test-helpers/tree/develop.svg?style=svg)](https://circleci.com/gh/davesag/sequelize-test-helpers/tree/develop) | [![codecov](https://codecov.io/gh/davesag/sequelize-test-helpers/branch/develop/graph/badge.svg)](https://codecov.io/gh/davesag/sequelize-test-helpers) | [![Vulnerabilities](https://snyk.io/test/github/davesag/sequelize-test-helpers/develop/badge.svg)](https://snyk.io/test/github/davesag/sequelize-test-helpers/develop) | Work in progress |
 | `master` | [![CircleCI](https://circleci.com/gh/davesag/sequelize-test-helpers/tree/master.svg?style=svg)](https://circleci.com/gh/davesag/sequelize-test-helpers/tree/master) | [![codecov](https://codecov.io/gh/davesag/sequelize-test-helpers/branch/master/graph/badge.svg)](https://codecov.io/gh/davesag/sequelize-test-helpers) | [![Vulnerabilities](https://snyk.io/test/github/davesag/sequelize-test-helpers/master/badge.svg)](https://snyk.io/test/github/davesag/sequelize-test-helpers/master) | Latest stable release |
 
 ### Prerequisites

@@ -1,19 +1,20 @@
-const { expect } = require('chai')
-
 const { sequelize, dataTypes, checkNonUniqueIndex } = require('../../../src')
 const IndexedModel = require('../../models/Indexed')
 
 describe('src/checkNonUniqueIndex', () => {
   const Model = IndexedModel(sequelize, dataTypes)
   const instance = new Model()
-  context('happy path', () => {
+  describe('happy path', () => {
     ;['name'].forEach(checkNonUniqueIndex(instance))
   })
 
-  context('unhappy path', () => {
-    it('fails the test', () =>
-      expect(() => {
+  describe('unhappy path', () => {
+    it('fails the test', () => {
+      try {
         checkNonUniqueIndex(instance)('no name')
-      }).to.throw)
+      } catch (e) {
+        expect(e).toBeTruthy()
+      }
+    })
   })
 })
