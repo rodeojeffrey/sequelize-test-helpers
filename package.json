@@ -1,6 +1,6 @@
 {
   "name": "sequelize-test-helpers-jest",
-  "version": "1.3.2",
+  "version": "0.1.0",
   "description": "A collection of utilities to help with unit-testing sequelize models using jest",
   "author": "Jeffrey C. <me@jeffca.me>",
   "contributors": [
@@ -33,10 +33,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/davesag/sequelize-test-helpers.git"
+    "url": "https://github.com/rodeojeffrey/sequelize-test-helpers-jest.git"
   },
   "bugs": {
-    "url": "https://github.com/davesag/sequelize-test-helpers/issues"
+    "url": "https://github.com/rodeojeffrey/sequelize-test-helpers-jest/issues"
   },
   "homepage": "https://github.com/davesag/sequelize-test-helpers#readme",
   "keywords": [
