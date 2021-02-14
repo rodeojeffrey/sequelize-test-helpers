@@ -1,17 +1,14 @@
 {
-  "name": "sequelize-test-helpers",
+  "name": "sequelize-test-helpers-jest",
   "version": "1.3.2",
-  "description": "A collection of utilities to help with unit-testing sequelize models",
-  "author": "Dave Sag <davesag@gmail.com>",
+  "description": "A collection of utilities to help with unit-testing sequelize models using jest",
+  "author": "Jeffrey C. <me@jeffca.me>",
   "contributors": [
-    "gerhardkubion (https://github.com/gerhardkubion)"
+    "gerhardkubion (https://github.com/gerhardkubion)",
+    "davesag (https://github.com/sponsors/davesag)"
   ],
   "type": "commonjs",
   "license": "MIT",
-  "funding": {
-    "type": "github",
-    "url": "https://github.com/sponsors/davesag"
-  },
   "main": "src/index.js",
   "engines": {
     "node": ">= 8.10.0"
