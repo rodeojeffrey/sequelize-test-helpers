@@ -5,7 +5,6 @@ This project uses jest and it's a fork of this [project](https://github.com/dave
 Thanks to [Dave](https://github.com/davesag) Give him some love.
 
 
-
 ### Prerequisites
 
 This library assumes:
