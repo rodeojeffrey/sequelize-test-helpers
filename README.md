@@ -16,7 +16,7 @@ This library assumes:
 
 ### Installation
 
-Add `sequelize-test-helpers-jest` as a `devDependency`:
+Add `sequelize-jest-helpers` as a `devDependency`:
 
 ```sh
 npm i -D sequelize-test-helpers

@@ -1,6 +1,6 @@
 {
-  "name": "sequelize-test-helpers-jest",
-  "version": "0.1.0",
+  "name": "sequelize-jest-helpers",
+  "version": "1.0.0",
   "description": "A collection of utilities to help with unit-testing sequelize models using jest",
   "author": "Jeffrey C. <me@jeffca.me>",
   "contributors": [
