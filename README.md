@@ -4,9 +4,7 @@ A collection of utilities to help with unit-testing [Sequelize](http://docs.sequ
 This project uses jest and it's a fork of this [project](https://github.com/davesag/sequelize-test-helpers)
 Thanks to [Dave](https://github.com/davesag) Give him some love.
 
-[![NPM](https://nodei.co/npm/sequelize-test-helpers.png)](https://nodei.co/npm/sequelize-test-helpers-jest/)
 
-## How to use
 
 ### Prerequisites
 
