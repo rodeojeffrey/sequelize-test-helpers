@@ -39,7 +39,7 @@ const sequelize = {
     model.prototype.reload = jest.fn()
     model.prototype.set = jest.fn()
     Object.keys(modelDefn).forEach(attachProp)
-    Object.entries(metaData).forEach([key, value] => model.prototype[key] = value)
+    Object.entries(metaData).forEach(([key, value]) => model.prototype[key] = value)
     
     return model
   }
